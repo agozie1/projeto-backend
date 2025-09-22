@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    container_name: backend-app
+    expose:
+      - "25000"   # só expõe para a rede interna (não publica na máquina host)
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend-app
+    ports:
+      - "8080:8080"   # somente o frontend fica público na máquina host
+    environment:
+      - BACKEND_URL=http://backend:25000
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

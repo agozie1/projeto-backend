@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aplicação Web - Projeto Nuvem</title>
+</head>
+<body>
+  <h1>Aplicação Web na Nuvem</h1>
+  <p id="mensagem">Carregando dados do back-end...</p>
+
+  <script>
+    async function carregarDados() {
+      try {
+        // Observe: chama /api/dados no mesmo host (servidor web)
+        const resposta = await fetch('/api/dados');
+        const dados = await resposta.json();
+        document.getElementById('mensagem').innerText =
+          `${dados.mensagem} (hora: ${dados.hora})`;
+      } catch (erro) {
+        document.getElementById('mensagem').innerText = "Erro ao carregar dados.";
+        console.error(erro);
+      }
+    }
+    carregarDados();
+  </script>
+</body>
+</html>
