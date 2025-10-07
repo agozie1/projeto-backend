@@ -5,10 +5,9 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// BACKEND_URL: valor default quando rodar com docker-compose
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:25000';
 
-// Servir arquivos estáticos da pasta public
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Proxy para backend
